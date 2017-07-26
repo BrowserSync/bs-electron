@@ -21,6 +21,9 @@
   },
   "dependencies": {
     "bs-lite": "^0.0.4",
+    "immutable": "^3.8.1",
+    "preact": "^8.2.1",
+    "staunch-store": "^1.2.0",
     "typescript": "^2.4.2"
   }
 }
