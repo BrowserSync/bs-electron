@@ -6,18 +6,23 @@ const {init} = require('bs-lite');
 const electron = require('electron');
 const remote = electron.remote;
 const mainProcess = remote.require('./main');
-const {SelectDirectory} = require('./src/selectDirectory');
+const {SelectDirectory} = require('./selectDirectory');
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
 
 const {bs, system} = init();
 const d = (incoming) => document.querySelector('#debug').innerHTML = JSON.stringify(incoming, null, 2);
-const d2 = (incoming) => document.querySelector('#debug2').innerHTML = JSON.stringify(incoming, null, 2);
+const d2 = (incoming) => document.querySelector('#debug-2').innerHTML = JSON.stringify(incoming, null, 2);
 const dir = system.actorOf(SelectDirectory);
 
 const dirs = Observable.fromEvent($('#directories'), 'click')
     .switchMap(() => {
         return dir.ask('selectMany')
+    })
+    .filter(x => typeof x !== 'undefined')
+    .catch(e => {
+        console.log(e);
+        return Observable.empty();
     })
     .share();
 
@@ -27,6 +32,7 @@ dirs.subscribe(dirs => {
 
 const ports = Observable.fromEvent($('#port'), 'input', e => e.target.value)
     .distinctUntilChanged()
+    .debounceTime(500)
     .map(Number)
     .map(value => {
         if (value > 1024 && value < 9999) {
@@ -50,11 +56,12 @@ Observable.combineLatest(
     ports.filter(x => x.valid).pluck('value'),
     dirs
 ).switchMap(([port, dirs]) => {
-    return bs.ask('init', {port, serveStatic: dirs})
+    return bs.ask('init', {server: {port}, serveStatic: dirs})
 })
     .subscribe(([server, options]) => {
         d(options);
-        d2(server.address());
+        $('#link').href = `http://localhost:${server.address().port}`;
+        $('#link').textContent = `http://localhost:${server.address().port}`;
     });
 
 // dir.ask('selectMany')

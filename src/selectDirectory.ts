@@ -3,7 +3,7 @@ const electron = require('electron');
 const remote = electron.remote;
 const {selectDirectory} = remote.require('./main');
 
-function SelectDirectory() {
+export function SelectDirectory() {
     return {
         methods: {
             'selectMany': function(stream) {
@@ -19,6 +19,3 @@ function SelectDirectory() {
         }
     }
 }
-
-module.exports = SelectDirectory;
-module.exports.SelectDirectory = SelectDirectory;

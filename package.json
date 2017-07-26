@@ -2,7 +2,7 @@
   "name": "electron-quick-start",
   "version": "1.0.0",
   "description": "A minimal Electron application",
-  "main": "main.js",
+  "main": "dist/main.js",
   "scripts": {
     "start": "electron ."
   },
@@ -20,6 +20,7 @@
     "electron": "~1.6.2"
   },
   "dependencies": {
-    "bs-lite": "^0.0.4"
+    "bs-lite": "^0.0.4",
+    "typescript": "^2.4.2"
   }
 }
