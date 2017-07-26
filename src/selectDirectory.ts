@@ -10,7 +10,7 @@ export function SelectDirectory() {
                 return stream.flatMap(({respond}) => {
                     return Observable.create(obs => {
                         selectDirectory((res) => {
-                            obs.next(respond(res));
+                            obs.next(respond(res || []));
                             obs.complete();
                         })
                     })

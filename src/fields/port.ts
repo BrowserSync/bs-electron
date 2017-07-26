@@ -8,12 +8,20 @@ export interface PortInputResult {
     value: number
 }
 
-export function bindPort(store: StaunchStore): Observable<PortInputResult> {
+export function bindPort(store: StaunchStore, bs, system): Observable<PortInputResult> {
 
     const elem       = $('[data-rx="port"]');
     const input      = $('#port-input', elem);
     const validation = $('#port-validation', elem);
-    const icon       = $('#input-icon', elem);
+    const icon       = $('#input-icon');
+
+    store.changes(['formInputs', 'inputs', 'port'])
+        .do(x => {
+            if (input.value !== String(x)) {
+                input.value = x;
+            }
+        })
+        .subscribe();
 
     return Observable.fromEvent(input, 'input', e => e.target.value)
         .distinctUntilChanged()
@@ -39,6 +47,11 @@ export function bindPort(store: StaunchStore): Observable<PortInputResult> {
         .do(x => {
             icon.textContent = x.valid ? 'done' : 'error_outline';
             icon.style.color = x.valid ? colors.green : colors.red;
+        })
+        .do(x => {
+            if (x.valid) {
+                store.dispatch({type: 'setPort', payload: x.value});
+            }
         })
         .debounceTime(500)
         .share();
