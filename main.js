@@ -54,7 +54,15 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow()
   }
-})
+});
+
+exports.selectDirectory = function (cb) {
+    // dialog.showOpenDialog as before
+    const dialog = electron.dialog;
+    dialog.showOpenDialog(mainWindow, {
+        properties: ['openDirectory', 'multiSelections']
+    }, cb);
+};
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
