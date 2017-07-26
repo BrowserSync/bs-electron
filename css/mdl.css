@@ -6582,6 +6582,10 @@ fieldset[disabled] .mdl-textfield .mdl-textfield__label, .mdl-textfield.is-disab
     visibility: visible
 }
 
+.mdl-textfield.rx-is-invalid .mdl-textfield__error {
+    visibility: visible
+}
+
 .mdl-textfield__expandable-holder {
     display: inline-block;
     position: relative;
