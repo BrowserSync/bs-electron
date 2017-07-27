@@ -20,6 +20,7 @@
     "electron": "~1.6.2"
   },
   "dependencies": {
+    "browser-sync": "^2.18.13",
     "bs-lite": "^0.0.4",
     "classnames": "^2.2.5",
     "immutable": "^3.8.1",

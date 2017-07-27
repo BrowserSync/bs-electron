@@ -1,0 +1,46 @@
+.button {
+    background: var(--accent);
+    height: 40px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    /*border-color: var(--accent);*/
+    border-radius: 5px;
+}
+
+.button--icon {
+    color: white;
+    width: 40px;
+}
+.button--icon-delete {
+    background: red;
+}
+.button--icon-text {
+    width: auto;
+    display: flex;
+    align-items: center;
+    padding-right: var(--base-spacing)
+}
+.button--icon-text span {
+    margin-left: var(--base-spacing);
+}
+
+.button--icon:hover {
+    background: var(--accent-hover);
+}
+
+.icon {
+    height: 40px;
+    width: 40px;
+    /*outline: 1px solid red;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon--color-success {
+    color: green;
+}
+.icon--color-error {
+    color: red;
+}

@@ -1,0 +1,9 @@
+.main {
+    background: white;
+    width: var(--width);
+    margin: 0 auto;
+    padding: var(--double-spacing);
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #c1c1c1;
+    margin-top: 20px;
+}

@@ -1,0 +1,9 @@
+.header h1 {
+    background: var(--accent);
+    width: var(--width);
+    margin: 0 auto;
+    padding: var(--base-spacing);
+    color: black;
+    font-family: monospace;
+    font-size: var(--base-font-size);
+}
