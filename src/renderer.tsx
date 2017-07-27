@@ -23,8 +23,7 @@ const glob = bindGlobal(store, bs, system);
 
 Observable.combineLatest(
     ports.filter(x => x.valid)
-        .pluck('value')
-        .startWith(store.getState(['formInputs', 'inputs', 'port'])),
+        .pluck('value'),
     Observable.merge(dirs, store.changes(['formInputs', 'inputs', 'dirs']).map(x => x.toJS()).skip(1))
 )
     .switchMap(([port, dirs]) => {

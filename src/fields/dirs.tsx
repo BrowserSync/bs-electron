@@ -14,22 +14,27 @@ export function bindDirs(store: StaunchStore, bs, system) {
         .map(x => x.toJS())
         .subscribe(dirs => {
             prev = render((
-                <ul class="demo-list-control mdl-list">
-                    {dirs.length === 0 && <p>Select a directory, or enter one manually</p>}
+                <div>
                     {dirs.length > 0 && dirs.map(dir => {
                         return (
-                            <li class="mdl-list__item">
-                                <button class="mdl-button mdl-js-button mdl-button--icon" type="button"
-                                        onClick={() => store.dispatch({type: 'removeDir', payload: dir})}>
-                                    <i class="material-icons">delete</i>
-                                </button>
-                                <span class="mdl-list__item-primary-content">
-                                  {dir}
-                                </span>
-                            </li>
+                            <div class="field__item">
+                                <input class="field__text-input field__text-input--dir"
+                                       type="text"
+                                       name="port"
+                                       id="directory-01"
+                                       value={dir}
+                                       disabled />
+                                    <div class="field__controls">
+                                        <button type="button"
+                                                class="button button--icon button--icon-delete"
+                                                onClick={() => store.dispatch({type: 'removeDir', payload: dir})}>
+                                            <i class="material-icons">delete_forever</i>
+                                        </button>
+                                    </div>
+                            </div>
                         )
                     })}
-                </ul>
+                </div>
 
             ), $dirList, prev)
         })
@@ -42,7 +47,7 @@ export function bindDirs(store: StaunchStore, bs, system) {
             if (x.length > 0) {
                 return store.dispatch({type: 'addDirs', payload: x})
             }
-            return store.dispatch({type: 'setDirs', payload: []})
+            // return store.dispatch({type: 'setDirs', payload: []})
         })
         .share();
 }

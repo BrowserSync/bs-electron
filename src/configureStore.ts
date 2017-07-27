@@ -16,7 +16,7 @@ export function configureStore(): StaunchStore {
             },
             formInputs: {
                 inputs: {
-                    port: 3000,
+                    port: null,
                     dirs: Set([]),
                 },
                 values: {

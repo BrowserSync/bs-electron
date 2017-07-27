@@ -12,35 +12,31 @@
 </head>
 <body>
     <main class="main">
-        <div class="field field--aligned">
-            <label for="port" class="field__label">Port:</label>
+        <div class="field field--aligned" data-rx="header">
+            <label for="port" class="field__label">URL:
+                <a href="#" id="url" target="_blank"></a>
+            </label>
+        </div>
+        <div class="field field--aligned" data-rx="port">
+            <label for="port" class="field__label">Port: (eg: 4000)</label>
             <div class="field__item">
-                <input class="field__text-input" type="text" name="port" id="port" value="3000">
+                <input class="field__text-input" type="text" name="port" id="port" value="">
                 <div class="field__controls">
-                    <span class="icon icon--color-success">
-                        <i class="material-icons">done</i>
+                    <span class="icon">
+                        <i class="material-icons" id="port-status-icon">network_check</i>
                         <!--<i class="material-icons">block</i>-->
                     </span>
                 </div>
             </div>
         </div>
         <div class="field field--aligned field--last">
-            <label class="field__label" for="port">Directories:</label>
-            <div class="field__item">
-                <input class="field__text-input field__text-input--dir"
-                       type="text"
-                       name="port"
-                       id="directory-01"
-                       value="/Users/shakyshane/sites/oss/bs-electron/index.html"
-                       disabled>
-                <div class="field__controls">
-                    <button type="button" class="button button--icon button--icon-delete">
-                        <i class="material-icons">delete_forever</i>
-                    </button>
-                </div>
-            </div>
-            <div class="field__item">
-                <button type="button" class="button button--icon button--icon-text">
+            <label class="field__label">Directories:</label>
+            <div id="dir-list"></div>
+            <div class="field__item" style="margin-top: 20px;">
+                <button type="button"
+                        class="button button--icon button--icon-text"
+                        id="dir-select"
+                >
                     <i class="material-icons">add_circle_outline</i>
                     <span>Add directory</span>
                 </button>

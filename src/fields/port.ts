@@ -11,9 +11,9 @@ export interface PortInputResult {
 export function bindPort(store: StaunchStore, bs, system): Observable<PortInputResult> {
 
     const elem       = $('[data-rx="port"]');
-    const input      = $('#port-input', elem);
-    const validation = $('#port-validation', elem);
-    const icon       = $('#input-icon');
+    const input      = $('#port', elem);
+    // const validation = $('#port-validation', elem);
+    const icon       = $('#port-status-icon');
 
     store.changes(['formInputs', 'inputs', 'port'])
         .do(x => {
@@ -39,7 +39,7 @@ export function bindPort(store: StaunchStore, bs, system): Observable<PortInputR
             }
         })
         .do(x => {
-            validation.textContent = x.valid ? 'VALID' : 'INVALID - enter a number between 1024 & 9999'
+            // validation.textContent = x.valid ? 'VALID' : 'INVALID - enter a number between 1024 & 9999'
         })
         .do(x => {
             elem.classList[x.valid ? 'remove' : 'add']('rx-is-invalid');
