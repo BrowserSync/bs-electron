@@ -1,0 +1,27 @@
+.errors {
+    display: none;
+
+}
+
+.errors--visible {
+    display: block;
+}
+
+.messages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-bottom: var(--double-spacing);
+}
+
+.message {
+
+}
+
+.message--error {
+    background: red;
+    border-radius: 5px;
+    color: white;
+    padding: var(--base-spacing);
+    font-size: 14px;
+}

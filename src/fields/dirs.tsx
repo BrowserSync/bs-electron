@@ -43,10 +43,11 @@ export function bindDirs(store: StaunchStore, bs, system) {
         .switchMap((): Observable<string[]> => {
             return dir.ask('selectMany')
         })
+        .filter(x => x.length > 0)
         .do(x => {
-            if (x.length > 0) {
-                return store.dispatch({type: 'addDirs', payload: x})
-            }
+            return store.dispatch({type: 'addDirs', payload: x})
+            // if (x.length > 0) {
+            // }
             // return store.dispatch({type: 'setDirs', payload: []})
         })
         .share();

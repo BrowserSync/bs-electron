@@ -9,18 +9,20 @@
     <link rel="stylesheet" href="css/field.css">
     <link rel="stylesheet" href="css/button.css">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/errors.css">
 </head>
 <body>
     <main class="main">
-        <div class="field field--aligned" data-rx="header">
-            <label for="port" class="field__label">URL:
-                <a href="#" id="url" target="_blank"></a>
-            </label>
-        </div>
+        <header id="rx-header"></header>
         <div class="field field--aligned" data-rx="port">
-            <label for="port" class="field__label">Port: (eg: 4000)</label>
+            <label for="port" class="field__label">Port:</label>
             <div class="field__item">
-                <input class="field__text-input" type="text" name="port" id="port" value="">
+                <input class="field__text-input"
+                       type="text"
+                       name="port"
+                       id="port"
+                       placeholder="eg: 4000"
+                       value="">
                 <div class="field__controls">
                     <span class="icon">
                         <i class="material-icons" id="port-status-icon">network_check</i>

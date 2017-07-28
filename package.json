@@ -17,11 +17,12 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "~1.6.2"
+    "electron": "~1.6.2",
+    "serve": "^6.0.3"
   },
   "dependencies": {
     "browser-sync": "^2.18.13",
-    "bs-lite": "^0.0.4",
+    "bs-lite": "^0.0.5",
     "classnames": "^2.2.5",
     "immutable": "^3.8.1",
     "preact": "^8.2.1",

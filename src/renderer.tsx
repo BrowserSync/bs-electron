@@ -4,9 +4,11 @@ import {bindPort} from "./fields/port";
 import {configureStore} from "./configureStore";
 import {bindDirs} from "./fields/dirs";
 import {bindGlobal} from "./global";
+import {BrowsersyncInitOutput, BrowsersyncInitResponse} from "bs-lite/dist/Browsersync";
+import {bindErrors} from "./errors";
 
 const store = configureStore();
-const {init} = require('bs-lite');
+const {init, Methods} = require('bs-lite');
 const {bs, system} = init();
 
 // const electron = require('electron');
@@ -20,18 +22,35 @@ const {bs, system} = init();
 const ports = bindPort(store, bs, system);
 const dirs = bindDirs(store, bs, system);
 const glob = bindGlobal(store, bs, system);
+bindErrors(store, bs);
+
+const dirUpdates = store.changes(['formInputs', 'inputs', 'dirs'])
+    .skip(1)
+    .map(x => x.toJS());
+
+const portUpdates = store.changes(['formInputs', 'inputs', 'port'])
+    .skip(1);
+
+dirs.subscribe();
+ports.subscribe();
 
 Observable.combineLatest(
-    ports.filter(x => x.valid)
-        .pluck('value'),
-    Observable.merge(dirs, store.changes(['formInputs', 'inputs', 'dirs']).map(x => x.toJS()).skip(1))
+    portUpdates.debounceTime(500),
+    dirUpdates,
 )
+    .do(x => store.dispatch({type: 'loadingState'}))
+    .delay(500)
     .switchMap(([port, dirs]) => {
-        return bs.ask('init', {server: {port}, serveStatic: dirs})
+        return bs.ask(Methods.Init, {server: {port}, serveStatic: dirs})
     })
-    .do(([server, options]) => {
-        store.dispatch({type: 'readyState', payload: {url: `http://localhost:${server.address().port}`}});
+    .do((resp: BrowsersyncInitResponse) => {
+        if (resp.errors.length) {
+            console.log('ERRORS', resp.errors);
+            return store.dispatch({type: 'initErrors', payload: resp.errors});
+        }
+        store.dispatch({type: 'initErrors', payload: []});
+        store.dispatch({type: 'readyState', payload: {url: `http://localhost:${resp.output.server.address().port}`}});
     })
     .subscribe((output) => {
-        console.log('both', output);
+        // console.log(output);
     });
