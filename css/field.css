@@ -1,9 +1,9 @@
 .field {
     margin-bottom: var(--double-spacing);
 }
-.field--aligned {
-    /*display: flex;*/
-    /*align-items: center;*/
+.field--tight {
+    margin-bottom: var(--base-spacing);
+    margin-top: -10px;
 }
 
 .field__label {
@@ -20,7 +20,7 @@
 .field__item {
     flex: 1;
     display: flex;
-
+    align-items: center;
 }
 .field__item + .field__item {
     margin-top: var(--base-spacing);
@@ -31,6 +31,8 @@
 }
 
 .field__text-input {
+    display: block;
+    width: 100%;
     height: 40px;
     font-size: 14px;
     /*color: var(--accent);*/
@@ -41,6 +43,11 @@
     flex: 1;
     font-family: monospace;
 }
+.field__text-link {
+    display: block;
+    width: 100%;
+    font-size: 12px;
+}
 
 .field__text-input--dir {
     font-size: 12px;
@@ -49,6 +56,8 @@
 
 .field__text-input[disabled] {
     /*background: #e4e4e4;*/
+    border-bottom:0;
+
 }
 
 .field__text-input:focus {

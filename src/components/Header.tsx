@@ -6,12 +6,9 @@ export function Header(props: GlobalState) {
     const errorMessages: IMessage[] = props.errors.map(error => ({type: IMessageTypes.Error, text: error}))
     const url = (() => {
         if (props.ready) {
-            return <label for="url" class="field__label">URL:{` `}
-                <a href={props.url}
-                   id="url"
-                   title="Open in a new Window"
-                   target="_blank">{props.url}</a>
-            </label>
+            return (
+                <label for="port" class="field__label field__label--plain">{props.url}</label>
+            )
         }
         if (props.loading) {
             return <label for="port" class="field__label">Loading, please wait</label>
